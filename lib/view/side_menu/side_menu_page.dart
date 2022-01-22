@@ -38,6 +38,39 @@ class SideMenuPage extends StatelessWidget {
             value: false,
             onChanged: null,
           ),
+          ListTile(
+              title: Text(StringR.showLicense),
+              onTap: () {
+                // ライセンス表記方法：1
+                showAboutDialog(
+                  context: context,
+                  applicationIcon: FlutterLogo(),
+                  applicationName: StringR.appTitle,
+                  applicationLegalese: "\u{a9} 2022 Starrybase LLC",
+                  children: [
+                    Text("他の情報やWidgetが出せる"),
+                  ],
+                );
+
+                // ライセンス表記方法：3
+                // showLicensePage(
+                //   context: context,
+                //   applicationName: StringR.appTitle,
+                //   applicationIcon: FlutterLogo(),
+                //   applicationLegalese: "\u{a9} 2022 Starrybase LLC",
+                //   applicationVersion: "1.0.0",
+                // );
+              }),
+          // ライセンス表記方法：2
+          // AboutListTile(
+          //   icon: Icon(Icons.info_outline),
+          //   applicationIcon: FlutterLogo(),
+          //   applicationName: StringR.appTitle,
+          //   applicationLegalese: "\u{a9} 2022 Starrybase LLC",
+          //   aboutBoxChildren: [
+          //     Text("他の情報やWidgetが出せる"),
+          //   ],
+          // ),
         ],
       ),
     );
