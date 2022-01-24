@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todo_pwa/data/task.dart';
 import 'package:todo_pwa/model/task_repository.dart';
 import 'package:todo_pwa/view/style.dart';
 
@@ -21,5 +22,6 @@ class ViewModel extends ChangeNotifier {
       limitDateTime,
       isImportant,
     );
+    print("tasks: $baseTaskList");
   }
 }
