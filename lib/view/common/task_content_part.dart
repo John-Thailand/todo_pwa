@@ -7,83 +7,97 @@ class TaskContentPart extends StatefulWidget {
   const TaskContentPart({Key? key}) : super(key: key);
 
   @override
-  State<TaskContentPart> createState() => _TaskContentPartState();
+  State<TaskContentPart> createState() => TaskContentPartState();
 }
 
-class _TaskContentPartState extends State<TaskContentPart> {
+class TaskContentPartState extends State<TaskContentPart> {
   final titleController = TextEditingController();
   final detailController = TextEditingController();
   bool isImportant = false;
   DateTime limitDateTime = DateTime.now();
 
+  final formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(16.0),
-      child: Column(
-        children: [
-          TextField(
-            autofocus: true,
-            maxLines: 1,
-            controller: titleController,
-            style: TextStyles.newTaskTitleTextStyle,
-            decoration: InputDecoration(
-              icon: Icon(Icons.title),
-              hintText: StringR.title,
-              border: OutlineInputBorder(),
-            ),
-          ),
-          VerticalSpacer.taskContent,
-          Row(
+      child: Form(
+        key: formKey,
+        child: SingleChildScrollView(
+          child: Column(
             children: [
-              HorizontalSpacer.taskContent,
-              Checkbox(
-                value: isImportant,
-                onChanged: (value) {
-                  setState(() {
-                    isImportant = value!;
-                  });
+              TextFormField(
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return StringR.pleaseEnterTitle;
+                  }
+                  return null;
                 },
+                autovalidateMode: AutovalidateMode.always,
+                autofocus: true,
+                maxLines: 1,
+                controller: titleController,
+                style: TextStyles.newTaskTitleTextStyle,
+                decoration: InputDecoration(
+                  icon: Icon(Icons.title),
+                  hintText: StringR.title,
+                  border: OutlineInputBorder(),
+                ),
               ),
-              Text(
-                StringR.important,
-                style: TextStyles.newTaskItemTextStyle,
+              VerticalSpacer.taskContent,
+              Row(
+                children: [
+                  HorizontalSpacer.taskContent,
+                  Checkbox(
+                    value: isImportant,
+                    onChanged: (value) {
+                      setState(() {
+                        isImportant = value!;
+                      });
+                    },
+                  ),
+                  Text(
+                    StringR.important,
+                    style: TextStyles.newTaskItemTextStyle,
+                  ),
+                ],
+              ),
+              VerticalSpacer.taskContent,
+              Row(
+                children: [
+                  HorizontalSpacer.taskContent,
+                  IconButton(
+                    onPressed: () => _setLimitDate(),
+                    icon: Icon(Icons.calendar_today),
+                  ),
+                  Text(
+                    convertDateTimeToString(limitDateTime),
+                    style: TextStyles.newTaskItemTextStyle,
+                  ),
+                  HorizontalSpacer.taskContent,
+                  (DateTime.now().compareTo(limitDateTime) > 0)
+                      ? Chip(
+                          label: Text(StringR.timeOver),
+                          backgroundColor: WidgetColors.timeOverChipBgColor,
+                        )
+                      : Container(),
+                ],
+              ),
+              VerticalSpacer.taskContent,
+              TextField(
+                maxLines: 10,
+                controller: detailController,
+                style: TextStyles.newTaskDetailTextStyle,
+                decoration: InputDecoration(
+                  icon: Icon(Icons.description),
+                  hintText: StringR.detail,
+                  border: OutlineInputBorder(),
+                ),
               ),
             ],
           ),
-          VerticalSpacer.taskContent,
-          Row(
-            children: [
-              HorizontalSpacer.taskContent,
-              IconButton(
-                onPressed: () => _setLimitDate(),
-                icon: Icon(Icons.calendar_today),
-              ),
-              Text(
-                convertDateTimeToString(limitDateTime),
-                style: TextStyles.newTaskItemTextStyle,
-              ),
-              HorizontalSpacer.taskContent,
-              (DateTime.now().compareTo(limitDateTime) > 0)
-                  ? Chip(
-                      label: Text(StringR.timeOver),
-                      backgroundColor: WidgetColors.timeOverChipBgColor,
-                    )
-                  : Container(),
-            ],
-          ),
-          VerticalSpacer.taskContent,
-          TextField(
-            maxLines: 10,
-            controller: detailController,
-            style: TextStyles.newTaskDetailTextStyle,
-            decoration: InputDecoration(
-              icon: Icon(Icons.description),
-              hintText: StringR.detail,
-              border: OutlineInputBorder(),
-            ),
-          ),
-        ],
+        ),
       ),
     );
   }

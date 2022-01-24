@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:todo_pwa/util/constants.dart';
 import 'package:todo_pwa/view/common/task_content_part.dart';
+import 'package:todo_pwa/view_model/view_model.dart';
+import 'package:provider/provider.dart';
 
 class AddTaskPage extends StatelessWidget {
-  const AddTaskPage({Key? key}) : super(key: key);
+  AddTaskPage({Key? key}) : super(key: key);
+
+  final taskContentKey = GlobalKey<TaskContentPartState>();
 
   @override
   Widget build(BuildContext context) {
@@ -22,9 +26,24 @@ class AddTaskPage extends StatelessWidget {
           ),
         ],
       ),
-      body: TaskContentPart(),
+      body: TaskContentPart(
+        key: taskContentKey,
+      ),
     );
   }
 
-  _onDoneAddNewTask(BuildContext context) {}
+  _onDoneAddNewTask(BuildContext context) {
+    final taskContentState = taskContentKey.currentState;
+    if (taskContentState == null) return;
+    if (taskContentState.formKey.currentState!.validate()) {
+      final viewModel = context.read<ViewModel>();
+      viewModel.addNewTask(
+        taskContentState.titleController.text,
+        taskContentState.detailController.text,
+        taskContentState.limitDateTime,
+        taskContentState.isImportant,
+      );
+      Navigator.pop(context);
+    }
+  }
 }
