@@ -11,6 +11,11 @@ class TaskListPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Future(() {
+      final viewModel = context.read<ViewModel>();
+      viewModel.getTaskList();
+    });
+
     return Consumer<ViewModel>(builder: (context, vm, child) {
       final screenSize = vm.screenSize;
 

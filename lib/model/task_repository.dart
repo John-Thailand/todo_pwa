@@ -28,4 +28,18 @@ class TaskRepository {
         .id;
     return maxId + 1;
   }
+
+  List<Task> getTaskList(
+    bool isSorted,
+    bool isFinishedTasksIncluded,
+  ) {
+    var returnList = <Task>[];
+    returnList = getBaseTaskList(isFinishedTasksIncluded);
+    return returnList;
+  }
+
+  List<Task> getBaseTaskList(bool isFinishedTasksIncluded) {
+    baseTaskList.sort((a, b) => a.limitDateTime.compareTo(b.limitDateTime));
+    return baseTaskList;
+  }
 }

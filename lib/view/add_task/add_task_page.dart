@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todo_pwa/util/constants.dart';
+import 'package:todo_pwa/view/common/show_snack_bar.dart';
 import 'package:todo_pwa/view/common/task_content_part.dart';
 import 'package:todo_pwa/view_model/view_model.dart';
 import 'package:provider/provider.dart';
@@ -44,6 +45,11 @@ class AddTaskPage extends StatelessWidget {
         taskContentState.isImportant,
       );
       Navigator.pop(context);
+
+      showSnackBar(
+        context: context,
+        contentText: StringR.addTaskCompleted,
+      );
     }
   }
 }
