@@ -4,6 +4,7 @@ import 'package:todo_pwa/util/constants.dart';
 import 'package:todo_pwa/view/common/show_add_new_task.dart';
 import 'package:todo_pwa/view/side_menu/side_menu_page.dart';
 import 'package:todo_pwa/view/style.dart';
+import 'package:todo_pwa/view/task_list/task_list_tile.dart';
 import 'package:todo_pwa/view_model/view_model.dart';
 
 class TaskListPage extends StatelessWidget {
@@ -18,17 +19,24 @@ class TaskListPage extends StatelessWidget {
 
     return Consumer<ViewModel>(builder: (context, vm, child) {
       final screenSize = vm.screenSize;
+      final selectedTaskList = vm.selectedTaskList;
+      final isSorted = vm.isSorted;
 
       return Scaffold(
-        backgroundColor: PageColor.taskListBgColor,
+        backgroundColor: CustomColors.taskListBgColor,
         appBar: AppBar(
           title: Text(StringR.taskList),
           centerTitle: true,
           actions: [
-            IconButton(
-              onPressed: () => _sort(context),
-              icon: const Icon(Icons.sort),
-            ),
+            (isSorted)
+                ? IconButton(
+                    onPressed: () => _sort(context, false),
+                    icon: const Icon(Icons.sort),
+                  )
+                : IconButton(
+                    onPressed: () => _sort(context, true),
+                    icon: const Icon(Icons.sort),
+                  ),
           ],
         ),
         floatingActionButton: (screenSize == ScreenSize.LARGE)
@@ -40,11 +48,31 @@ class TaskListPage extends StatelessWidget {
         drawer: (screenSize != ScreenSize.LARGE)
             ? Drawer(child: SideMenuPage())
             : null,
+        body: ListView.builder(
+          itemCount: selectedTaskList.length,
+          shrinkWrap: true,
+          itemBuilder: (context, int index) {
+            final task = selectedTaskList[index];
+
+            final now = DateTime.now();
+            final limit = task.limitDateTime;
+
+            return Card(
+              color: (now.compareTo(limit) > 0)
+                  ? CustomColors.periodOverTaskColor
+                  : CustomColors.taskCardBgColor(context),
+              child: TaskListTilePart(task: task),
+            );
+          },
+        ),
       );
     });
   }
 
-  _sort(BuildContext context) {}
+  _sort(BuildContext context, bool isSort) {
+    final viewModel = context.read<ViewModel>();
+    viewModel.sort(isSort);
+  }
 
   _addNewTask(BuildContext context) {
     showAddNewTask(context);

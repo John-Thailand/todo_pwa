@@ -11,7 +11,7 @@ class SideMenuPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: PageColor.sideMenuBgColor,
+      backgroundColor: CustomColors.sideMenuBgColor,
       body: ListView(
         padding: EdgeInsets.zero,
         children: [

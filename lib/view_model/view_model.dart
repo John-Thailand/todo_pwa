@@ -26,7 +26,7 @@ class ViewModel extends ChangeNotifier {
       limitDateTime,
       isImportant,
     );
-    print("tasks: $baseTaskList");
+    getTaskList();
   }
 
   void getTaskList() {
@@ -34,5 +34,10 @@ class ViewModel extends ChangeNotifier {
       isSorted,
       isFinishedTasksIncluded,
     );
+  }
+
+  void sort(bool isSort) {
+    isSorted = isSort;
+    getTaskList();
   }
 }
