@@ -35,7 +35,12 @@ class TaskListTilePart extends StatelessWidget {
               //     ),
               //   )
               : Container(),
-          Text(task.title),
+          Expanded(
+            child: AutoSizeText(
+              task.title,
+              overflow: TextOverflow.ellipsis,
+            ),
+          ),
         ],
       ),
       subtitle: AutoSizeText(

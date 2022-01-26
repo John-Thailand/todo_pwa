@@ -35,11 +35,33 @@ class TaskRepository {
   ) {
     var returnList = <Task>[];
     returnList = getBaseTaskList(isFinishedTasksIncluded);
+
+    if (isSorted) {
+      return sortByImportant(returnList);
+    }
+
     return returnList;
   }
 
   List<Task> getBaseTaskList(bool isFinishedTasksIncluded) {
     baseTaskList.sort((a, b) => a.limitDateTime.compareTo(b.limitDateTime));
     return baseTaskList;
+  }
+
+  List<Task> sortByImportant(List<Task> taskList) {
+    taskList.sort((a, b) {
+      final isImportantA = a.isImportant;
+      final isImportantB = b.isImportant;
+      final compare = a.limitDateTime.compareTo(b.limitDateTime);
+
+      if (isImportantA && (!isImportantB || compare < 0)) {
+        return -1;
+      } else if (!isImportantB && compare < 0) {
+        return -1;
+      } else {
+        return 1;
+      }
+    });
+    return taskList;
   }
 }
