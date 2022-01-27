@@ -7,12 +7,22 @@ import 'package:todo_pwa/view/style.dart';
 
 class TaskListTilePart extends StatelessWidget {
   final Task task;
+  final ValueChanged onFinishChanged;
 
-  const TaskListTilePart({Key? key, required this.task}) : super(key: key);
+  const TaskListTilePart({
+    Key? key,
+    required this.task,
+    required this.onFinishChanged,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
+      leading: Radio(
+        value: true,
+        groupValue: task.isFinished,
+        onChanged: (value) => onFinishChanged(value),
+      ),
       title: Row(
         children: [
           (task.isImportant)

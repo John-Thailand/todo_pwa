@@ -45,7 +45,12 @@ class TaskRepository {
 
   List<Task> getBaseTaskList(bool isFinishedTasksIncluded) {
     baseTaskList.sort((a, b) => a.limitDateTime.compareTo(b.limitDateTime));
-    return baseTaskList;
+
+    if (isFinishedTasksIncluded) {
+      return baseTaskList;
+    } else {
+      return baseTaskList.where((task) => task.isFinished == false).toList();
+    }
   }
 
   List<Task> sortByImportant(List<Task> taskList) {
@@ -63,5 +68,19 @@ class TaskRepository {
       }
     });
     return taskList;
+  }
+
+  void finishTask(Task selectedTask, isFinished) {
+    final updateTask = selectedTask.copyWith(isFinished: isFinished);
+    updateTaskList(updateTask);
+  }
+
+  void updateTaskList(Task updateTask) {
+    final index = searchIndex(updateTask);
+    baseTaskList[index] = updateTask;
+  }
+
+  int searchIndex(Task selectedTask) {
+    return baseTaskList.indexWhere((task) => task.id == selectedTask.id);
   }
 }

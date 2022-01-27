@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:todo_pwa/data/task.dart';
 import 'package:todo_pwa/util/constants.dart';
 import 'package:todo_pwa/view/common/show_add_new_task.dart';
 import 'package:todo_pwa/view/side_menu/side_menu_page.dart';
@@ -61,7 +62,10 @@ class TaskListPage extends StatelessWidget {
               color: (now.compareTo(limit) > 0)
                   ? CustomColors.periodOverTaskColor
                   : CustomColors.taskCardBgColor(context),
-              child: TaskListTilePart(task: task),
+              child: TaskListTilePart(
+                  task: task,
+                  onFinishChanged: (isFinished) =>
+                      _finishTask(context, isFinished, task)),
             );
           },
         ),
@@ -76,5 +80,11 @@ class TaskListPage extends StatelessWidget {
 
   _addNewTask(BuildContext context) {
     showAddNewTask(context);
+  }
+
+  _finishTask(BuildContext context, isFinished, Task selectedTask) {
+    if (isFinished == null) return;
+    final viewModel = context.read<ViewModel>();
+    viewModel.finishTask(selectedTask, isFinished);
   }
 }
