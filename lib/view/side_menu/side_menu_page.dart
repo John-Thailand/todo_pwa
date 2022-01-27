@@ -34,11 +34,14 @@ class SideMenuPage extends StatelessWidget {
               _addNewTask(context);
             },
           ),
-          SwitchListTile(
-            title: Text(StringR.isFinishedTaskIncluded),
-            value: false,
-            onChanged: null,
-          ),
+          Consumer<ViewModel>(builder: (context, vm, child) {
+            final isFinishedTasksIncludded = vm.isFinishedTasksIncluded;
+            return SwitchListTile(
+              title: Text(StringR.isFinishedTaskIncluded),
+              value: isFinishedTasksIncludded,
+              onChanged: (isIncluded) => vm.changeFinishStatus(isIncluded),
+            );
+          }),
           ListTile(
               title: Text(StringR.showLicense),
               onTap: () {

@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:todo_pwa/data/task.dart';
 import 'package:todo_pwa/util/constants.dart';
 import 'package:todo_pwa/view/common/show_add_new_task.dart';
+import 'package:todo_pwa/view/common/show_snack_bar.dart';
 import 'package:todo_pwa/view/side_menu/side_menu_page.dart';
 import 'package:todo_pwa/view/style.dart';
 import 'package:todo_pwa/view/task_list/task_list_tile.dart';
@@ -63,9 +64,11 @@ class TaskListPage extends StatelessWidget {
                   ? CustomColors.periodOverTaskColor
                   : CustomColors.taskCardBgColor(context),
               child: TaskListTilePart(
-                  task: task,
-                  onFinishChanged: (isFinished) =>
-                      _finishTask(context, isFinished, task)),
+                task: task,
+                onFinishChanged: (isFinished) =>
+                    _finishTask(context, isFinished, task),
+                onDelete: () => _deleteTask(context, task),
+              ),
             );
           },
         ),
@@ -86,5 +89,24 @@ class TaskListPage extends StatelessWidget {
     if (isFinished == null) return;
     final viewModel = context.read<ViewModel>();
     viewModel.finishTask(selectedTask, isFinished);
+
+    showSnackBar(
+      context: context,
+      contentText: StringR.finishTaskCompleted,
+      isSnackBarActionNeeded: true,
+      onUndone: () => viewModel.undo(),
+    );
+  }
+
+  _deleteTask(BuildContext context, Task selectedTask) {
+    final viewModel = context.read<ViewModel>();
+    viewModel.deleteTask(selectedTask);
+
+    showSnackBar(
+      context: context,
+      contentText: StringR.deleteTaskCompleted,
+      isSnackBarActionNeeded: true,
+      onUndone: () => viewModel.undo(),
+    );
   }
 }

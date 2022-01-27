@@ -1,6 +1,8 @@
 import 'package:todo_pwa/data/task.dart';
 
 class TaskRepository {
+  List<Task> baseTaskListBeforeChange = [];
+
   void addNewTask(
     String title,
     String detail,
@@ -71,8 +73,16 @@ class TaskRepository {
   }
 
   void finishTask(Task selectedTask, isFinished) {
+    // baseTaskListBeforeChange = baseTaskList;
+    baseTaskListBeforeChange = copyBaseTaskList();
     final updateTask = selectedTask.copyWith(isFinished: isFinished);
     updateTaskList(updateTask);
+  }
+
+  void deleteTask(Task selectedTask) {
+    baseTaskListBeforeChange = copyBaseTaskList();
+    final index = searchIndex(selectedTask);
+    baseTaskList.removeAt(index);
   }
 
   void updateTaskList(Task updateTask) {
@@ -82,5 +92,19 @@ class TaskRepository {
 
   int searchIndex(Task selectedTask) {
     return baseTaskList.indexWhere((task) => task.id == selectedTask.id);
+  }
+
+  void undo() {
+    baseTaskList = baseTaskListBeforeChange;
+  }
+
+  List<Task> copyBaseTaskList() {
+    var returnList = <Task>[];
+
+    baseTaskList.forEach((task) {
+      returnList.add(task);
+    });
+
+    return returnList;
   }
 }

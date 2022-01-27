@@ -49,6 +49,7 @@ class AddTaskPage extends StatelessWidget {
       showSnackBar(
         context: context,
         contentText: StringR.addTaskCompleted,
+        isSnackBarActionNeeded: false,
       );
     }
   }

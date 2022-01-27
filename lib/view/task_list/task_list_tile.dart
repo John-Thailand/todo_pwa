@@ -8,11 +8,13 @@ import 'package:todo_pwa/view/style.dart';
 class TaskListTilePart extends StatelessWidget {
   final Task task;
   final ValueChanged onFinishChanged;
+  final VoidCallback onDelete;
 
   const TaskListTilePart({
     Key? key,
     required this.task,
     required this.onFinishChanged,
+    required this.onDelete,
   }) : super(key: key);
 
   @override
@@ -23,6 +25,7 @@ class TaskListTilePart extends StatelessWidget {
         groupValue: task.isFinished,
         onChanged: (value) => onFinishChanged(value),
       ),
+      onLongPress: onDelete,
       title: Row(
         children: [
           (task.isImportant)
