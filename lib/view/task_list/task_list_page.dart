@@ -4,6 +4,7 @@ import 'package:todo_pwa/data/task.dart';
 import 'package:todo_pwa/util/constants.dart';
 import 'package:todo_pwa/view/common/show_add_new_task.dart';
 import 'package:todo_pwa/view/common/show_snack_bar.dart';
+import 'package:todo_pwa/view/detail/detail_screen.dart';
 import 'package:todo_pwa/view/side_menu/side_menu_page.dart';
 import 'package:todo_pwa/view/style.dart';
 import 'package:todo_pwa/view/task_list/task_list_tile.dart';
@@ -68,6 +69,7 @@ class TaskListPage extends StatelessWidget {
                 onFinishChanged: (isFinished) =>
                     _finishTask(context, isFinished, task),
                 onDelete: () => _deleteTask(context, task),
+                onEdit: () => _showTaskDetail(context, task),
               ),
             );
           },
@@ -108,5 +110,20 @@ class TaskListPage extends StatelessWidget {
       isSnackBarActionNeeded: true,
       onUndone: () => viewModel.undo(),
     );
+  }
+
+  _showTaskDetail(BuildContext context, Task selectedTask) {
+    final viewModel = context.read<ViewModel>();
+    final screenSize = viewModel.screenSize;
+    viewModel.setCurrentTask(selectedTask);
+
+    if (screenSize == ScreenSize.SMALL) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => DetailScreen(),
+        ),
+      );
+    }
   }
 }

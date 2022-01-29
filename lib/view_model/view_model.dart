@@ -18,6 +18,8 @@ class ViewModel extends ChangeNotifier {
   // 完了したタスクも含むのか
   bool isFinishedTasksIncluded = false;
 
+  Task? currentTask;
+
   // 新しいタスクを追加
   void addNewTask(
     String title,
@@ -70,5 +72,10 @@ class ViewModel extends ChangeNotifier {
   changeFinishStatus(bool isIncluded) {
     isFinishedTasksIncluded = isIncluded;
     getTaskList();
+  }
+
+  void setCurrentTask(Task? selectedTask) {
+    currentTask = selectedTask;
+    notifyListeners();
   }
 }
