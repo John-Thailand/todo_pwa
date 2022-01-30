@@ -74,6 +74,7 @@ class ViewModel extends ChangeNotifier {
     getTaskList();
   }
 
+  // 現在のタスクの情報をセット
   void setCurrentTask(Task? selectedTask) {
     currentTask = selectedTask;
     notifyListeners();
