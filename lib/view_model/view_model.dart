@@ -19,6 +19,7 @@ class ViewModel extends ChangeNotifier {
   bool isFinishedTasksIncluded = false;
 
   Task? currentTask;
+  Task? taskBeforeChange;
 
   // 新しいタスクを追加
   void addNewTask(
@@ -52,18 +53,21 @@ class ViewModel extends ChangeNotifier {
 
   // タスクを完了する
   void finishTask(Task selectedTask, isFinished) {
+    taskBeforeChange = selectedTask;
     repository.finishTask(selectedTask, isFinished);
     getTaskList();
   }
 
   // タスクを削除する
   void deleteTask(Task selectedTask) {
+    taskBeforeChange = selectedTask;
     repository.deleteTask(selectedTask);
     getTaskList();
   }
 
   // UNDO処理
   undo() {
+    currentTask = taskBeforeChange;
     repository.undo();
     getTaskList();
   }
@@ -78,5 +82,10 @@ class ViewModel extends ChangeNotifier {
   void setCurrentTask(Task? selectedTask) {
     currentTask = selectedTask;
     notifyListeners();
+  }
+
+  void updateTask(Task taskUpdated) {
+    repository.updateTaskList(taskUpdated);
+    getTaskList();
   }
 }

@@ -28,6 +28,7 @@ class AddTaskPage extends StatelessWidget {
         ],
       ),
       body: TaskContentPart(
+        isEditMode: false,
         key: taskContentKey,
       ),
     );

@@ -98,6 +98,8 @@ class TaskListPage extends StatelessWidget {
       isSnackBarActionNeeded: true,
       onUndone: () => viewModel.undo(),
     );
+
+    viewModel.setCurrentTask(null);
   }
 
   _deleteTask(BuildContext context, Task selectedTask) {
@@ -110,6 +112,8 @@ class TaskListPage extends StatelessWidget {
       isSnackBarActionNeeded: true,
       onUndone: () => viewModel.undo(),
     );
+
+    viewModel.setCurrentTask(null);
   }
 
   _showTaskDetail(BuildContext context, Task selectedTask) {
