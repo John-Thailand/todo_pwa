@@ -108,6 +108,7 @@ class TaskRepository {
     baseTaskList = baseTaskListBeforeChange;
   }
 
+  // ベースタスクリストのコピー
   List<Task> copyBaseTaskList() {
     var returnList = <Task>[];
 
