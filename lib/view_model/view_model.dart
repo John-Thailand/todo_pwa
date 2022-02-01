@@ -84,6 +84,7 @@ class ViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  // タスクのアップデート
   void updateTask(Task taskUpdated) {
     repository.updateTaskList(taskUpdated);
     getTaskList();
