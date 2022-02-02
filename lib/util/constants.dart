@@ -24,3 +24,7 @@ class StringR {
   static String showLicense = "ライセンスの表示";
 }
 
+enum TaskListTileMenu {
+  EDIT,
+  DELETE,
+}
