@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_pwa/data/task.dart';
 import 'package:todo_pwa/util/constants.dart';
@@ -64,18 +65,55 @@ class TaskListPage extends StatelessWidget {
               color: (now.compareTo(limit) > 0)
                   ? CustomColors.periodOverTaskColor
                   : CustomColors.taskCardBgColor(context),
-              child: TaskListTilePart(
-                task: task,
-                onFinishChanged: (isFinished) =>
-                    _finishTask(context, isFinished, task),
-                onDelete: () => _deleteTask(context, task),
-                onEdit: () => _showTaskDetail(context, task),
-              ),
+              child: (DeviceInfo.isWebOrDesktop)
+                  ? _createTaskListTile(context, task)
+                  : Slidable(
+                      key: ValueKey<int>(task.id),
+                      child: _createTaskListTile(context, task),
+                      endActionPane: ActionPane(
+                        dismissible: DismissiblePane(
+                          onDismissed: () => _deleteTask(context, task),
+                        ),
+                        motion: const ScrollMotion(),
+                        extentRatio: 0.65,
+                        children: [
+                          SlidableAction(
+                            label: StringR.edit,
+                            icon: Icons.edit,
+                            backgroundColor:
+                                CustomColors.slideActionColorLight(context),
+                            onPressed: (context) =>
+                                _showTaskDetail(context, task),
+                          ),
+                          SlidableAction(
+                            label: StringR.delete,
+                            icon: Icons.delete,
+                            backgroundColor:
+                                CustomColors.slideActionColorDark(context),
+                            onPressed: (context) => _deleteTask(context, task),
+                          ),
+                          SlidableAction(
+                            label: StringR.close,
+                            icon: Icons.close,
+                            onPressed: null,
+                          ),
+                        ],
+                      ),
+                    ),
             );
           },
         ),
       );
     });
+  }
+
+  _createTaskListTile(BuildContext context, Task task) {
+    return TaskListTilePart(
+      task: task,
+      onFinishChanged: (isFinished) => _finishTask(context, isFinished, task),
+      onDelete: () => _deleteTask(context, task),
+      onEdit: () => _showTaskDetail(context, task),
+    );
   }
 
   _sort(BuildContext context, bool isSort) {

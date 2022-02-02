@@ -15,6 +15,11 @@ class CustomColors {
   static Color? detailFabTextColor(BuildContext context) =>
       Theme.of(context).textTheme.caption?.color;
 
+  static Color slideActionColorDark(BuildContext context) =>
+      Theme.of(context).primaryColorDark;
+  static Color slideActionColorLight(BuildContext context) =>
+      Theme.of(context).primaryColorLight;
+
   static const detailPageFabBgColor = Colors.transparent;
 }
 
