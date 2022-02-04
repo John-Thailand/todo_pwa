@@ -68,9 +68,9 @@ class TaskContentPartState extends State<TaskContentPart> {
                   controller: titleController,
                   style: TextStyles.newTaskTitleTextStyle,
                   decoration: InputDecoration(
-                    icon: Icon(Icons.title),
+                    icon: const Icon(Icons.title),
                     hintText: StringR.title,
-                    border: OutlineInputBorder(),
+                    border: const OutlineInputBorder(),
                   ),
                 ),
                 VerticalSpacer.taskContent,
@@ -97,7 +97,7 @@ class TaskContentPartState extends State<TaskContentPart> {
                     HorizontalSpacer.taskContent,
                     IconButton(
                       onPressed: () => _setLimitDate(),
-                      icon: Icon(Icons.calendar_today),
+                      icon: const Icon(Icons.calendar_today),
                     ),
                     Text(
                       convertDateTimeToString(limitDateTime),
@@ -118,9 +118,9 @@ class TaskContentPartState extends State<TaskContentPart> {
                   controller: detailController,
                   style: TextStyles.newTaskDetailTextStyle,
                   decoration: InputDecoration(
-                    icon: Icon(Icons.description),
+                    icon: const Icon(Icons.description),
                     hintText: StringR.detail,
-                    border: OutlineInputBorder(),
+                    border: const OutlineInputBorder(),
                   ),
                 ),
               ],
@@ -135,9 +135,9 @@ class TaskContentPartState extends State<TaskContentPart> {
     limitDateTime = await showDatePicker(
           context: context,
           initialDate: DateTime.now(),
-          firstDate: DateTime.now().subtract(Duration(days: 365)),
-          lastDate: DateTime.now().add(Duration(days: 36500)),
-          locale: Locale("ja"),
+          firstDate: DateTime.now().subtract(const Duration(days: 365)),
+          lastDate: DateTime.now().add(const Duration(days: 36500)),
+          locale: const Locale("ja"),
         ) ??
         DateTime.now();
     setState(() {});
