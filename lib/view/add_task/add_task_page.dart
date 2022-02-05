@@ -16,14 +16,14 @@ class AddTaskPage extends StatelessWidget {
       appBar: AppBar(
         leading: IconButton(
           onPressed: () => Navigator.pop(context),
-          icon: Icon(Icons.close),
+          icon: const Icon(Icons.close),
         ),
         centerTitle: true,
         title: Text(StringR.addNewTask),
         actions: [
           IconButton(
             onPressed: () => _onDoneAddNewTask(context),
-            icon: Icon(Icons.done),
+            icon: const Icon(Icons.done),
           ),
         ],
       ),

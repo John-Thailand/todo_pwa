@@ -17,14 +17,14 @@ class HomeScreen extends StatelessWidget {
     return LayoutBuilder(
       builder: (context, constraints) {
         if (constraints.maxWidth >= BreakPointWidth.midToLarge) {
-          viewModel.screenSize = ScreenSize.LARGE;
+          viewModel.screenSize = ScreenSize.large;
           return Row(
             children: [
-              Expanded(
+              const Expanded(
                 flex: 3,
                 child: SideMenuPage(),
               ),
-              Expanded(
+              const Expanded(
                 flex: 4,
                 child: TaskListPage(),
               ),
@@ -35,10 +35,10 @@ class HomeScreen extends StatelessWidget {
             ],
           );
         } else if (constraints.maxWidth >= BreakPointWidth.smallToMid) {
-          viewModel.screenSize = ScreenSize.MID;
+          viewModel.screenSize = ScreenSize.mid;
           return Row(
             children: [
-              Expanded(
+              const Expanded(
                 flex: 1,
                 child: TaskListPage(),
               ),
@@ -49,8 +49,8 @@ class HomeScreen extends StatelessWidget {
             ],
           );
         } else {
-          viewModel.screenSize = ScreenSize.SMALL;
-          return TaskListPage();
+          viewModel.screenSize = ScreenSize.small;
+          return const TaskListPage();
         }
       },
     );

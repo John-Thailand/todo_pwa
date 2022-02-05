@@ -57,7 +57,7 @@ class _TaskListTilePartState extends State<TaskListTilePart> {
                 ? Padding(
                     padding: const EdgeInsets.only(right: 4.0),
                     child: Container(
-                      padding: EdgeInsets.all(4.0),
+                      padding: const EdgeInsets.all(4.0),
                       color: Colors.black,
                       child: Text(
                         StringR.important,
@@ -95,16 +95,16 @@ class _TaskListTilePartState extends State<TaskListTilePart> {
                   return [
                     PopupMenuItem<TaskListTileMenu>(
                       child: Text(StringR.edit),
-                      value: TaskListTileMenu.EDIT,
+                      value: TaskListTileMenu.edit,
                     ),
                     PopupMenuItem<TaskListTileMenu>(
                       child: Text(StringR.delete),
-                      value: TaskListTileMenu.DELETE,
+                      value: TaskListTileMenu.delete,
                     ),
                   ];
                 },
                 onSelected: (selectedMenu) {
-                  if (selectedMenu == TaskListTileMenu.EDIT) {
+                  if (selectedMenu == TaskListTileMenu.edit) {
                     widget.onEdit();
                   } else {
                     widget.onDelete();

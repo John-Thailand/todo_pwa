@@ -21,7 +21,7 @@ class DetailPage extends StatelessWidget {
           final selectedTask = data.item1;
           final screenSize = data.item2;
 
-          if (selectedTask != null && screenSize != ScreenSize.SMALL) {
+          if (selectedTask != null && screenSize != ScreenSize.small) {
             _updateDetailInfo(selectedTask);
           }
 
@@ -34,11 +34,11 @@ class DetailPage extends StatelessWidget {
                     ? IconButton(
                         onPressed: () {
                           _clearCurrentTask(context);
-                          if (screenSize == ScreenSize.SMALL) {
+                          if (screenSize == ScreenSize.small) {
                             Navigator.pop(context);
                           }
                         },
-                        icon: Icon(Icons.close),
+                        icon: const Icon(Icons.close),
                       )
                     : null,
                 title: Text(StringR.taskDetail),
@@ -46,13 +46,13 @@ class DetailPage extends StatelessWidget {
                 actions: (selectedTask != null)
                     ? [
                         FocusTraversalOrder(
-                          order: NumericFocusOrder(3.0),
+                          order: const NumericFocusOrder(3.0),
                           child: IconButton(
                             onPressed: () => _updateTask(context, selectedTask),
-                            icon: Icon(Icons.done),
+                            icon: const Icon(Icons.done),
                           ),
                         ),
-                        FocusTraversalOrder(
+                        const FocusTraversalOrder(
                           order: NumericFocusOrder(4.0),
                           child: IconButton(
                             onPressed: null,
@@ -162,7 +162,7 @@ class DetailPage extends StatelessWidget {
     final viewModel = context.read<ViewModel>();
     final screenSize = viewModel.screenSize;
 
-    if (screenSize == ScreenSize.SMALL) {
+    if (screenSize == ScreenSize.small) {
       Navigator.pop(context);
     } else {
       if (!isEdit) viewModel.setCurrentTask(null);

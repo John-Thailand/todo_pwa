@@ -7,7 +7,7 @@ import 'package:todo_pwa/view/home_screen.dart';
 void main() => runApp(
       MultiProvider(
         providers: globalProviders,
-        child: MyApp(),
+        child: const MyApp(),
       ),
     );
 
@@ -19,15 +19,15 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData.dark(),
-      localizationsDelegates: [
+      localizationsDelegates: const [
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
-      supportedLocales: [
+      supportedLocales: const [
         Locale("ja"),
       ],
-      home: HomeScreen(),
+      home: const HomeScreen(),
     );
   }
 }

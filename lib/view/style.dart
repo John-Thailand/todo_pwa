@@ -33,9 +33,9 @@ class BreakPointWidth {
 }
 
 enum ScreenSize {
-  SMALL,
-  MID,
-  LARGE,
+  small,
+  mid,
+  large,
 }
 
 class WidgetSize {

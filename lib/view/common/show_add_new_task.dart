@@ -9,11 +9,11 @@ showAddNewTask(BuildContext context) {
   final viewModel = context.read<ViewModel>();
   final screenSize = viewModel.screenSize;
 
-  if (screenSize == ScreenSize.SMALL) {
+  if (screenSize == ScreenSize.small) {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => AddTaskScreen(),
+        builder: (context) => const AddTaskScreen(),
       ),
     );
   } else {

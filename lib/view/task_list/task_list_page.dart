@@ -43,14 +43,14 @@ class TaskListPage extends StatelessWidget {
                   ),
           ],
         ),
-        floatingActionButton: (screenSize == ScreenSize.LARGE)
+        floatingActionButton: (screenSize == ScreenSize.large)
             ? null
             : FloatingActionButton(
                 onPressed: () => _addNewTask(context),
                 child: const Icon(Icons.add),
               ),
-        drawer: (screenSize != ScreenSize.LARGE)
-            ? Drawer(child: SideMenuPage())
+        drawer: (screenSize != ScreenSize.large)
+            ? const Drawer(child: SideMenuPage())
             : null,
         body: ListView.builder(
           itemCount: selectedTaskList.length,
@@ -159,11 +159,11 @@ class TaskListPage extends StatelessWidget {
     final screenSize = viewModel.screenSize;
     viewModel.setCurrentTask(selectedTask);
 
-    if (screenSize == ScreenSize.SMALL) {
+    if (screenSize == ScreenSize.small) {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => DetailScreen(),
+          builder: (context) => const DetailScreen(),
         ),
       );
     }

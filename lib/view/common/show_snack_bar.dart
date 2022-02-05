@@ -14,7 +14,7 @@ showSnackBar({
   final viewModel = context.read<ViewModel>();
   final screenSize = viewModel.screenSize;
 
-  if (screenSize == ScreenSize.SMALL) {
+  if (screenSize == ScreenSize.small) {
     final snackBar = SnackBar(
       content: Text(contentText),
       action: (isSnackBarActionNeeded || onUndone != null)
@@ -28,7 +28,7 @@ showSnackBar({
   } else {
     showModalBottomSheet(
       context: context,
-      builder: (context) => Container(
+      builder: (context) => SizedBox(
         height: 60.0,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 32.0),

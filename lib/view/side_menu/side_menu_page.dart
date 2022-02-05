@@ -18,7 +18,7 @@ class SideMenuPage extends StatelessWidget {
           DrawerHeader(
             child: Column(
               children: [
-                FlutterLogo(
+                const FlutterLogo(
                   size: 100.0,
                 ),
                 Text(StringR.appTitle),
@@ -30,7 +30,7 @@ class SideMenuPage extends StatelessWidget {
             onTap: () {
               final viewModel = context.read<ViewModel>();
               final screenSize = viewModel.screenSize;
-              if (screenSize != ScreenSize.LARGE) Navigator.pop(context);
+              if (screenSize != ScreenSize.large) Navigator.pop(context);
               _addNewTask(context);
             },
           ),
@@ -48,11 +48,11 @@ class SideMenuPage extends StatelessWidget {
                 // ライセンス表記方法：1
                 showAboutDialog(
                   context: context,
-                  applicationIcon: FlutterLogo(),
+                  applicationIcon: const FlutterLogo(),
                   applicationName: StringR.appTitle,
                   applicationLegalese: "\u{a9} 2022 Starrybase LLC",
                   children: [
-                    Text("他の情報やWidgetが出せる"),
+                    const Text("他の情報やWidgetが出せる"),
                   ],
                 );
 

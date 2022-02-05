@@ -112,9 +112,9 @@ class TaskRepository {
   List<Task> copyBaseTaskList() {
     var returnList = <Task>[];
 
-    baseTaskList.forEach((task) {
+    for (Task task in baseTaskList) {
       returnList.add(task);
-    });
+    }
 
     return returnList;
   }

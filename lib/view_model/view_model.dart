@@ -9,7 +9,7 @@ class ViewModel extends ChangeNotifier {
   ViewModel({required this.repository});
 
   // スクリーンサイズ
-  ScreenSize screenSize = ScreenSize.SMALL;
+  ScreenSize screenSize = ScreenSize.small;
 
   // 選択されたタスクのリスト
   List<Task> selectedTaskList = [];
