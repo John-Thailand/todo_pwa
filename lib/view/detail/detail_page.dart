@@ -96,11 +96,13 @@ class DetailPage extends StatelessWidget {
         });
   }
 
+  // 現在のタスクをクリアする
   void _clearCurrentTask(BuildContext context) {
     final viewModel = context.read<ViewModel>();
     viewModel.setCurrentTask(null);
   }
 
+  // 詳細情報をアップデートする
   void _updateDetailInfo(Task selectedTask) {
     final taskContentPartState = taskContentPartKey.currentState;
     if (taskContentPartState == null) return;
@@ -108,6 +110,7 @@ class DetailPage extends StatelessWidget {
     taskContentPartState.setDetailData();
   }
 
+  // タスクをアップデートする
   _updateTask(BuildContext context, Task selectedTask) {
     final taskContentPartState = taskContentPartKey.currentState;
     if (taskContentPartState == null) return;
@@ -131,6 +134,7 @@ class DetailPage extends StatelessWidget {
     }
   }
 
+  // タスクを削除する
   _deleteTask(BuildContext context, Task selectedTask) {
     final viewModel = context.read<ViewModel>();
     viewModel.deleteTask(selectedTask);
@@ -143,6 +147,7 @@ class DetailPage extends StatelessWidget {
     endEditTask(context, isEdit: false);
   }
 
+  // タスクを完了する
   _finishTask(BuildContext context, Task selectedTask) {
     final viewModel = context.read<ViewModel>();
     final isFinished = !selectedTask.isFinished;
