@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
+// 色の管理
 class CustomColors {
   static const sideMenuBgColor = Color(0xFF1b1b1b);
   static const taskListBgColor = Color(0xFF212121);
@@ -27,11 +28,13 @@ class WidgetColors {
   static const timeOverChipBgColor = Colors.red;
 }
 
+// ブレークポイント
 class BreakPointWidth {
   static const double smallToMid = 600;
   static const double midToLarge = 1240;
 }
 
+// レスポンシブ対応用のスクリーンサイズ
 enum ScreenSize {
   small,
   mid,
@@ -43,6 +46,7 @@ class WidgetSize {
   static const double addTaskDialogHeight = 500.0;
 }
 
+// テキストスタイル
 class TextStyles {
   static const newTaskTitleTextStyle = TextStyle(fontSize: 18.0);
   static const newTaskItemTextStyle = TextStyle(fontSize: 16.0);
@@ -51,15 +55,18 @@ class TextStyles {
   static const completeButtonTextStyle = TextStyle(fontSize: 16.0);
 }
 
+// 垂直方向のスペーサーの間隔
 class VerticalSpacer {
   static const taskContent = SizedBox(height: 8.0);
 }
 
+// 水平方向のスペーサーの間隔
 class HorizontalSpacer {
   static const taskContent = SizedBox(width: 24.0);
   static const snackBar = SizedBox(width: 16.0);
 }
 
+// デバイスの情報
 class DeviceInfo {
   static bool get isDesktop =>
       !kIsWeb && (Platform.isMacOS || Platform.isWindows || Platform.isLinux);
