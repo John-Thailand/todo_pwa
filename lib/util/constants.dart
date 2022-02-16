@@ -1,3 +1,4 @@
+// 表示する文字
 class StringR {
   static String taskList = "TODOリスト";
   static String appTitle = "シンプルTODOリスト";
@@ -24,6 +25,7 @@ class StringR {
   static String showLicense = "ライセンスの表示";
 }
 
+// タスクの操作メニュー
 enum TaskListTileMenu {
   edit,
   delete,
