@@ -24,6 +24,7 @@ class CustomColors {
   static const detailPageFabBgColor = Colors.transparent;
 }
 
+// ウィジェットカラー
 class WidgetColors {
   static const timeOverChipBgColor = Colors.red;
 }
